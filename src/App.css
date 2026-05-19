@@ -1,0 +1,170 @@
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+
+}
+
+.card {
+  width: 100%;
+  max-width: 64rem;
+  padding: 2rem;
+  background-color: var(--accent-bg);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-h);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dropzone {
+  min-height: 23rem;
+  border: 4px dashed var(--accent);
+  background-color: var(--accent-bg);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: border-color 0.3s;
+}
+
+.dropzone:hover {
+  border-color: var(--accent-border);
+}
+
+.dropzone img {
+  width: 6rem;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.file-list {
+  border: 2px solid var(--border);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  max-height: 23rem;
+  overflow: auto;
+}
+
+.file-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-info img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.empty-state {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-state p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-2, #6b7280);
+  text-align: center;
+}
+
+.btn-upload {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.btn-upload:hover {
+  border-color: var(--accent-border);
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-delete:hover {
+  color: #b91c1c;
+}
+
+.btn-save {
+  padding: 0.5rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.btn-save:hover {
+  border-color: var(--accent-border);
+}
+
+.error-text {
+  color: #ef4444;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.save-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
