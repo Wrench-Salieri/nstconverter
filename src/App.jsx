@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react'
+import Select from 'react-select'
+import dropdownStyles from './components/dropdownStyles'
 //import { parse } from "paraparse"
 //import { xlsx } from "xlsx"
 import nstLogo from './assets/nst.svg'
@@ -7,9 +9,19 @@ import './App.css'
 function App() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [error, setError] = useState("");
-
+  const [selectedPartner, setSelectedPartner] = useState(null);
+  
   const fileInputRef = useRef(null);
   const acceptedFileExtensions = ["csv", "xlsx"];
+
+  const partnerData = [
+            { value: 'rideways', label: 'Rideways' },
+            { value: 'ath_holiday', label: 'Holiday (Athens)' },
+            { value: 'sant_holiday', label: 'Holiday (Santorini)' },
+            { value: 'arr_tui', label: 'Tui (Arrivals)' },
+            { value: 'dep_tui', label: 'Tui (Departures)' },
+            { value: 'fay', label: 'Cyclades Collection' },
+          ];
 
   const acceptedFileTypesString = acceptedFileExtensions
     .map((ext) => `.${ext}`)
@@ -18,12 +30,42 @@ function App() {
   const handleSubmit = () => {
     if (selectedFiles.length === 0) {
       setError("File is required");
-    } else if (!error) {
-      setSelectedFiles([]);
-      setError("");
+      return;
     }
-  };
+    if (!selectedPartner) {
+        setError("Partner selection is required");
+        return;
+    } 
 
+    console.log("Selected Partner:", selectedPartner);
+    console.log("Selected Files:", selectedFiles);
+
+    /*switch (selectedPartner.value) {
+      case 'rideways':
+        convertRideways(selectedFiles);
+        break;
+      case 'ath_holiday':
+        convertHoliday(selectedFiles);
+        break;
+      case 'sant_holiday':
+        convertHoliday(selectedFiles);
+        break;
+      case 'arr_tui':
+        convertTui(selectedFiles, 'arrivals');
+        break;
+      case 'dep_tui':
+        convertTui(selectedFiles, 'departures');
+        break;
+      case 'fay':
+        convertCyclades(selectedFiles);
+        break;
+      default:
+        setError("Unknown partner selected");
+    } */
+    setSelectedFiles([]);
+    setError("");
+  };
+  
   const handleFileChange = (event) => {
     const newFileArray = Array.from(event.target.files);
     processFiles(newFileArray);
@@ -73,6 +115,16 @@ function App() {
         <h2>
           NST Converter
         </h2>
+        <div className='dropdown-wrapper'>
+          <Select
+            options={partnerData}
+            onChange={setSelectedPartner}
+            placeholder="Select a partner"
+            isClearable
+            styles={dropdownStyles}
+            isSearchable={false}
+          />
+        </div>
         <div className='grid'>
           <div
             className='dropzone'
@@ -154,7 +206,7 @@ function App() {
             onClick={handleSubmit}
             className='btn-save'
           >
-            Save
+            Convert
           </button>
         </div>
       </div>
