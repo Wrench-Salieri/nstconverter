@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react'
 import Select from 'react-select'
 import dropdownStyles from './components/dropdownStyles'
-//import { parse } from "paraparse"
-//import { xlsx } from "xlsx"
+import { convertCyclades } from "./components/converters/cyclades";
+import { convertHoliday } from "./components/converters/holiday";
+import { convertRideways } from "./components/converters/rideways";
 import nstLogo from './assets/nst.svg'
+import documentIcon from './assets/document.png'
 import './App.css'
 
 function App() {
@@ -16,11 +18,12 @@ function App() {
 
   const partnerData = [
             { value: 'rideways', label: 'Rideways' },
-            { value: 'ath_holiday', label: 'Holiday (Athens)' },
+            //{ value: 'ath_holiday', label: 'Holiday (Athens)' },
             { value: 'sant_holiday', label: 'Holiday (Santorini)' },
-            { value: 'arr_tui', label: 'Tui (Arrivals)' },
-            { value: 'dep_tui', label: 'Tui (Departures)' },
+            //{ value: 'arr_tui', label: 'Tui (Arrivals)' },
+            //{ value: 'dep_tui', label: 'Tui (Departures)' },
             { value: 'fay', label: 'Cyclades Collection' },
+            //{ value: 'aurinko', label: 'Aurinko' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -40,28 +43,19 @@ function App() {
     console.log("Selected Partner:", selectedPartner);
     console.log("Selected Files:", selectedFiles);
 
-    /*switch (selectedPartner.value) {
+    switch (selectedPartner.value) {
       case 'rideways':
         convertRideways(selectedFiles);
         break;
-      case 'ath_holiday':
-        convertHoliday(selectedFiles);
-        break;
       case 'sant_holiday':
         convertHoliday(selectedFiles);
-        break;
-      case 'arr_tui':
-        convertTui(selectedFiles, 'arrivals');
-        break;
-      case 'dep_tui':
-        convertTui(selectedFiles, 'departures');
         break;
       case 'fay':
         convertCyclades(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");
-    } */
+    } 
     setSelectedFiles([]);
     setError("");
   };
@@ -166,7 +160,7 @@ function App() {
                   <li key={file.name}>
                     <div className='file-info'>
                       <img
-                        src={nstLogo}
+                        src={documentIcon}
                         alt='File Icon'
                       />
                       <span>{file.name}</span>
