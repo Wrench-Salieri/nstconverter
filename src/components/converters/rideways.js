@@ -1,5 +1,6 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
+import { normalizeLocation } from "../utils/locations.js";
 import { normalizeHotel } from "../utils/hotels.js";
 
 export async function convertRideways(files) {
@@ -58,7 +59,7 @@ export async function convertRideways(files) {
     const start_time = dateTime[1].substring(0, 5);
     const name = row[4];
     const isArrival = row[8].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("AIRPORT");
-    const hotelArea = normalizeHotel(isArrival ? row[10] : row[8]);
+    const hotelArea = normalizeHotel(isArrival ? row[10] : row[8], row[0]);
     const pickup = isArrival ? "Airport" : hotelArea;
     const dropoff = isArrival ? hotelArea : "Airport";
     const hotel = (isArrival ? row[10] : row[8]).split(",")[0].trim();
@@ -105,5 +106,4 @@ export async function convertRideways(files) {
     newWorkbook,
     `${file.name.replace(/\.[^.]+$/, "")}_converted.xlsx`
   );
-
 }
