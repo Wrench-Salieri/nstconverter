@@ -1,7 +1,6 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-import { normalizeLocation } from "../utils/locations.js";
-import { normalizeHotel } from "../utils/hotels.js";
+import { normalizeLocation } from "../utils/locations_ath.js";
 
 export async function convertRideways(files) {
   const file = files[0];
@@ -43,55 +42,17 @@ export async function convertRideways(files) {
     "Πελάτης",
   ]);
 
-  const VEHICLE_MAP = {
-    "STANDARD": "Standard",
-    "PEOPLE_CARRIER": "People Carrier",
-    "LARGE_PEOPLE_CARRIER": "Large People Carrier",
-    "MINIVAN": "Minivan",
-    "EXECUTIVE": "Executive",
-    "EXECUTIVE_PEOPLE_CARRIER": "Executive People Carrier",
-    "EXECUTIVE_LARGE_PEOPLE_CARRIER": "Executive Large People Carrier",
-    "EXECUTIVE_MINIVAN": "Executive Minivan",
-  };
-
   rows.slice(1).forEach((row) => {
 
     const code = row[0];
+    //isArrival = ;
     const dateTime = row[1].split("T");
     const date = dateTime[0].split("-").reverse().join("/");       
     const start_time = dateTime[1].substring(0, 5);
     const name = `${row[4]} ${row[5]}`;
-    const pickupRaw = row[8];
-    const dropoffRaw = row[10];
-    const pickupUp = pickupRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const dropoffUp = dropoffRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const pickupHotelName = pickupRaw.split(",")[0].trim();
-    const dropoffHotelName = dropoffRaw.split(",")[0].trim();
-    
-    let pickup, dropoff, routeType, route;
-
-    if (pickupUp.includes("AIRPORT") || pickupUp.includes("PORT")) {
-      const pickupLabel = pickupUp.includes("AIRPORT") ? "Airport" : "Port";
-      const dropoffArea = normalizeHotel(dropoffRaw, row[0]);
-      pickup = pickupLabel;
-      dropoff = dropoffArea;
-      routeType = "Arrival Transfer";
-      route = `${pickupLabel}-${dropoffHotelName}`;
-    } else if (dropoffUp.includes("AIRPORT") || dropoffUp.includes("PORT")) {
-      const dropoffLabel = dropoffUp.includes("AIRPORT") ? "Airport" : "Port";
-      const pickupArea = normalizeHotel(pickupRaw, row[0]);
-      pickup = pickupArea;
-      dropoff = dropoffLabel;
-      routeType = "Departure Transfer";
-      route = `${pickupHotelName}-${dropoffLabel}`;
-    } else {
-      pickup = normalizeHotel(pickupRaw, row[0]);
-      dropoff = normalizeHotel(dropoffRaw, row[0]);
-      routeType = "In-Between Transfer";
-      route = `${pickupHotelName}-${dropoffHotelName}`;
-    }
-
-    const pax = row[6];
+    const adults = row[6];
+    const children = row[7];
+    const infants = row[8];
     const flight = row[15];
     const flight_time = row[16] ? row[16].split("T")[1]?.substring(0, 5) : "";
     const comment = VEHICLE_MAP[row[7]] || row[7];
@@ -105,9 +66,9 @@ export async function convertRideways(files) {
       pickup,
       dropoff,
       route,
-      pax,
-      "",
-      "",
+      adults,
+      children,
+      infants,
       "Transfer",
       routeType,
       "Private",
@@ -117,7 +78,7 @@ export async function convertRideways(files) {
       flight_time,
       comment,
       insPrice,
-      "Rideways"
+      "EasyJet"
     ]);
   });
 

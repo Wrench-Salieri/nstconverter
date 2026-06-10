@@ -605,6 +605,8 @@ export const HOTEL_MAP = {
   "Acqua Vatos Santorini Hotel": "Kamari",
   "Fira Deep Blue Suites": "Fira",
   "Abasa Suites": "Fira",
+  "Athina Luxury Suites": "Fira",
+  "Villa Maina": "Kamari",
 };
 
 export function normalizeHotel(value, reference) {

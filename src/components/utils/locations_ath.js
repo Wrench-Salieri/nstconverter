@@ -1,6 +1,10 @@
 export const LOCATION_MAP_ATH = {
-  "AIRPORT": "Athens Airport",
-  "ATHENS CENTER": "Athens Center",
+  "RAFINA": "Rafina port",
+  "RAFINA PORT": "Rafina port",
+  "PORT OF PIRAEUS ATHENS": "Port of Piraeus",
+  "ATHENS INTERNATIONAL AIRPORT": "Athens Airport",
+  "MARATHONAS": "Marathonas",
+  "GLYFADA": "Glyfada",
 };
 
 export function normalizeLocation(value) {
