@@ -580,6 +580,14 @@ export const HOTEL_MAP = {
   "Little Rock Villa - Oia": "Oia",
   "Old Castle Oia by Mr and Mrs White": "Oia",
   "Santa Mar ECO Suites": "Karterados",
+  "Fira Cozy Rooms": "Fira",
+  "Alonia Studios": "Firostefani",
+  "Oscar Hotel": "Kamari",
+  "Caval II": "Fira",
+  "La Torretta Suites": "Pyrgos",
+  "Villa Soula": "Fira",
+  "Nefeles Luxury Suites": "Fira",
+  "Amerisa Suites": "Fira",
 };
 
 export function normalizeHotel(value, reference) {

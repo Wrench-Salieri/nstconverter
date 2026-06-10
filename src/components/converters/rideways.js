@@ -49,6 +49,9 @@ export async function convertRideways(files) {
     "LARGE_PEOPLE_CARRIER": "Large People Carrier",
     "MINIVAN": "Minivan",
     "EXECUTIVE": "Executive",
+    "EXECUTIVE_PEOPLE_CARRIER": "Executive People Carrier",
+    "EXECUTIVE_LARGE_PEOPLE_CARRIER": "Executive Large People Carrier",
+    "EXECUTIVE_MINIVAN": "Executive Minivan",
   };
 
   rows.slice(1).forEach((row) => {
@@ -57,7 +60,7 @@ export async function convertRideways(files) {
     const dateTime = row[1].split("T");
     const date = dateTime[0].split("-").reverse().join("/");       
     const start_time = dateTime[1].substring(0, 5);
-    const name = row[4];
+    const name = `${row[4]} ${row[5]}`;
     const isArrival = row[8].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("AIRPORT");
     const hotelArea = normalizeHotel(isArrival ? row[10] : row[8], row[0]);
     const pickup = isArrival ? "Airport" : hotelArea;
