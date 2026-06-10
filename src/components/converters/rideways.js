@@ -61,21 +61,43 @@ export async function convertRideways(files) {
     const date = dateTime[0].split("-").reverse().join("/");       
     const start_time = dateTime[1].substring(0, 5);
     const name = `${row[4]} ${row[5]}`;
-    const isArrival = row[8].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("AIRPORT");
-    const hotelArea = normalizeHotel(isArrival ? row[10] : row[8], row[0]);
-    const pickup = isArrival ? "Airport" : hotelArea;
-    const dropoff = isArrival ? hotelArea : "Airport";
-    const hotel = (isArrival ? row[10] : row[8]).split(",")[0].trim();
+    const pickupRaw = row[8];
+    const dropoffRaw = row[10];
+    const pickupUp = pickupRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const dropoffUp = dropoffRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const pickupHotelName = pickupRaw.split(",")[0].trim();
+    const dropoffHotelName = dropoffRaw.split(",")[0].trim();
+    
+    let pickup, dropoff, routeType, route;
+
+    if (pickupUp.includes("AIRPORT") || pickupUp.includes("PORT")) {
+      const pickupLabel = pickupUp.includes("AIRPORT") ? "Airport" : "Port";
+      const dropoffArea = normalizeHotel(dropoffRaw, row[0]);
+      pickup = pickupLabel;
+      dropoff = dropoffArea;
+      routeType = "Arrival Transfer";
+      route = `${pickupLabel}-${dropoffHotelName}`;
+    } else if (dropoffUp.includes("AIRPORT") || dropoffUp.includes("PORT")) {
+      const dropoffLabel = dropoffUp.includes("AIRPORT") ? "Airport" : "Port";
+      const pickupArea = normalizeHotel(pickupRaw, row[0]);
+      pickup = pickupArea;
+      dropoff = dropoffLabel;
+      routeType = "Departure Transfer";
+      route = `${pickupHotelName}-${dropoffLabel}`;
+    } else {
+      pickup = normalizeHotel(pickupRaw, row[0]);
+      dropoff = normalizeHotel(dropoffRaw, row[0]);
+      routeType = "In-Between Transfer";
+      route = `${pickupHotelName}-${dropoffHotelName}`;
+    }
+
     const pax = row[6];
     const children = row[5];
     const infants = row[6];
-    const routeType = isArrival ? `Arrival Transfer` : `Departure Transfer`;
     const flight = row[15];
     const flight_time = row[16] ? row[16].split("T")[1]?.substring(0, 5) : "";
     const comment = VEHICLE_MAP[row[7]] || row[7];
     const insPrice = row[2];
-
-    const route = isArrival ? `Airport-${hotel}` : `${hotel}-Airport`;
     
     outputRows.push([
       code,

@@ -7,6 +7,7 @@ export const LOCATION_MAP = {
   "BAXEDES": "Baxedes",
   "EMPORIO": "Emporio",
   "EXO GONIA": "Exo Gonia",
+  "EXO KATIKIES": "Fira",
   "EXOMITIS": "Perivolos",
   "FIRA": "Fira",
   "FIROSTEFANI": "Firostefani",
