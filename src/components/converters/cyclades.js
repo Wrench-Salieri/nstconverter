@@ -53,9 +53,9 @@ export async function convertCyclades(files) {
     const pickup = normalizeLocation(row[22]);
     const dropoff = normalizeLocation(row[23]);
     const hotel = row[14];
-    const adults = row[9];
-    const children = row[10];
-    const infants = row[11];
+    const adults = row[10];
+    const children = row[11];
+    const infants = row[12];
     const arrivalDeparture = row[2]
     const flight = row[5];
     const flight_time = row[7];
