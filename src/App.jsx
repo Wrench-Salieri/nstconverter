@@ -4,6 +4,7 @@ import dropdownStyles from './components/dropdownStyles'
 import { convertCyclades } from "./components/converters/cyclades";
 import { convertHoliday } from "./components/converters/holiday";
 import { convertRideways } from "./components/converters/rideways";
+import { convertZenix } from "./components/converters/zenix";
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -24,6 +25,7 @@ function App() {
             //{ value: 'dep_tui', label: 'Tui (Departures)' },
             { value: 'fay', label: 'Cyclades Collection' },
             //{ value: 'aurinko', label: 'Aurinko' },
+            { value: 'zenix', label: 'EasyJet' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -52,6 +54,9 @@ function App() {
         break;
       case 'fay':
         convertCyclades(selectedFiles);
+        break;
+      case 'zenix':
+        convertZenix(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

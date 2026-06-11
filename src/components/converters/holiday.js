@@ -57,7 +57,8 @@ export async function convertHoliday(files) {
     const infants = row[6];
     const routeType = isArrival ? `Arrival Transfer` : `Departure Transfer`;
     const type = row[18];
-    const transferType = type.toLowerCase().includes("shared") ? "Shared" : "Private";
+    const transferType = type.toLowerCase().includes("shared") ? "Shared" : type.toLowerCase().includes("premium") ? "Premium" : "Private";
+    
     const flight = isArrival ? row[12] : row[25];
     const flight_time = isArrival ? row[11] : row[24];
     const phone = row[3];

@@ -46,8 +46,10 @@ export async function convertCyclades(files) {
   ]);
 
   rows.slice(1).forEach((row) => {
-    const code = row[0];
-    const date = row[3];
+    const arrivalDeparture = row[2]
+    const code = arrivalDeparture ? row[0] : `${row[0]}-1`;
+    const [month, day, year] = row[3].split("/");
+    const date = `${day}/${month}/${year}`; 
     const start_time = row[4];
     const name = row[1];
     const pickup = normalizeLocation(row[22]);
@@ -56,7 +58,6 @@ export async function convertCyclades(files) {
     const adults = row[10];
     const children = row[11];
     const infants = row[12];
-    const arrivalDeparture = row[2]
     const flight = row[5];
     const flight_time = row[7];
     const phone = row[15];
