@@ -4,6 +4,7 @@ export const HOTEL_MAP = {
   "Golden Coast": "Marathonas",
   "The Port Square Hotel": "Piraeus",
   "Vincci EverEden": "Anavyssos",
+  "Piraeus Theoxenia": "Piraeus",
 };
 
 export function normalizeHotel(value, reference) {

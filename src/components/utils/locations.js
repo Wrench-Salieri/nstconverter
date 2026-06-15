@@ -13,6 +13,7 @@ export const LOCATION_MAP = {
   "FIROSTEFANI": "Firostefani",
   "FOINIKIA": "Foinikia",
   "FINIKIA": "Foinikia",
+  "HARBOUR": "Port",
   "IMEROVIGLI": "Imerovigli",
   "KAMARI": "Kamari",
   "KARTERADOS": "Karterados",

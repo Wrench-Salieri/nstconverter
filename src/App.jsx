@@ -5,6 +5,7 @@ import { convertCyclades } from "./components/converters/cyclades";
 import { convertHoliday } from "./components/converters/holiday";
 import { convertRideways } from "./components/converters/rideways";
 import { convertZenix } from "./components/converters/zenix";
+import { convertTuiArrivals } from "./components/converters/tuiArrivals";
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -15,13 +16,13 @@ function App() {
   const [selectedPartner, setSelectedPartner] = useState(null);
   
   const fileInputRef = useRef(null);
-  const acceptedFileExtensions = ["csv", "xlsx"];
+  const acceptedFileExtensions = ["csv", "xlsx", "xls"];
 
   const partnerData = [
             { value: 'rideways', label: 'Rideways' },
             //{ value: 'ath_holiday', label: 'Holiday (Athens)' },
             { value: 'sant_holiday', label: 'Holiday (Santorini)' },
-            //{ value: 'arr_tui', label: 'Tui (Arrivals)' },
+            { value: 'arr_tui', label: 'Tui (Arrivals) WIP' },
             //{ value: 'dep_tui', label: 'Tui (Departures)' },
             { value: 'fay', label: 'Cyclades Collection' },
             //{ value: 'aurinko', label: 'Aurinko' },
@@ -57,6 +58,9 @@ function App() {
         break;
       case 'zenix':
         convertZenix(selectedFiles);
+        break;
+      case 'arr_tui':
+        convertTuiArrivals(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

@@ -113,7 +113,7 @@ export async function convertZenix(files) {
       flight_time_Dep,
       "",
       "",
-      "Easy Jet"
+      "GEM TRAVEL"
     ]);
   });
 
