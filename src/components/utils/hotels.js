@@ -800,6 +800,13 @@ export const HOTEL_MAP = {
   "IRIDA Santorini": "Imerovigli",
   "Brusco": "Pyrgos",
   "Alunia Incognito Suites - Adults Only": "Pyrgos",
+  "Studios Apartments Kapetanios": "Perissa",
+  "Fusionnelle": "Fira",
+  "ΔΗΜΗΤΡΑΣ": "Kamari",
+  "Moto Chris": "Fira",
+  "DL Santorini": "Monolithos",
+  "Domus Pyrgos": "Pyrgos",
+  "Goulielmos Hotel": "Akrotiri",
 };
 
 export function normalizeHotel(value, reference) {
