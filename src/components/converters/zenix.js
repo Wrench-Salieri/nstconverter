@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-import { normalizeLocation } from "../utils/locations_ath.js";
+import { normalizeLocationAth } from "../utils/locations_ath.js";
 import { normalizeHotel } from "../utils/hotels_ath.js";
 
 export async function convertZenix(files) {

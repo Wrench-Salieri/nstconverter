@@ -6,6 +6,7 @@ import { convertHoliday } from "./components/converters/holiday";
 import { convertRideways } from "./components/converters/rideways";
 import { convertZenix } from "./components/converters/zenix";
 import { convertTuiArrivals } from "./components/converters/tuiArrivals";
+import { convertSuntransfers } from "./components/converters/suntransfers";
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -27,6 +28,7 @@ function App() {
             { value: 'fay', label: 'Cyclades Collection' },
             //{ value: 'aurinko', label: 'Aurinko' },
             { value: 'zenix', label: 'EasyJet' },
+            { value: 'suntransfers', label: 'Suntransfers' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -61,6 +63,9 @@ function App() {
         break;
       case 'arr_tui':
         convertTuiArrivals(selectedFiles);
+        break;
+      case 'suntransfers':
+        convertSuntransfers(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

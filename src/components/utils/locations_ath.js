@@ -1,4 +1,5 @@
 export const LOCATION_MAP_ATH = {
+  "ATHENS AIRPORT": "Athens airport",
   "RAFINA": "Rafina port",
   "RAFINA PORT": "Rafina port",
   "PORT OF PIRAEUS ATHENS": "Port of Piraeus",
@@ -7,7 +8,7 @@ export const LOCATION_MAP_ATH = {
   "GLYFADA": "Glyfada",
 };
 
-export function normalizeLocation(value) {
+export function normalizeLocationAth(value) {
   if (!value) return "";
 
   const text = value.toString().toUpperCase();

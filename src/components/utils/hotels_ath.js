@@ -1,4 +1,4 @@
-import { normalizeLocation } from "./locations_ath.js";
+import { normalizeLocationAth } from "./locations_ath.js";
 
 export const HOTEL_MAP = {
   "Golden Coast": "Marathonas",
@@ -14,7 +14,7 @@ export function normalizeHotel(value, reference) {
   if (HOTEL_MAP[name] !== undefined) return HOTEL_MAP[name];
   
   const afterFirstComma = value.split(",").slice(1).join(",").trim();
-  const locationGuess = normalizeLocation(afterFirstComma);
+  const locationGuess = normalizeLocationAth(afterFirstComma);
   if (locationGuess !== afterFirstComma) return locationGuess;
 
   return `Athens city centre`;
