@@ -871,7 +871,7 @@ export const HOTEL_MAP = {
   "Nelya Suites": "Megalochori",
   "Cavo Tagoo Santorini": "Imerovigli",
   "DEILINO Food Drink": "Oia",
-  "Villa Anemomilos Perissa": "Perissa",
+  "Villa Anemomilos Perissa": "Perissa",  
 };
 
 export function normalizeHotel(value, reference) {
