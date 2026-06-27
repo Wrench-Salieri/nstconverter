@@ -2,7 +2,7 @@ import * as XLSX from "xlsx";
 import { normalizeLocation } from "../utils/locations.js";
 import { normalizeClient } from "../utils/tui.js";
 
-export async function convertTuiArrivals(files) {
+export async function convertTuiDepartures(files) {
   const file = files[0];
 
   const data = await file.arrayBuffer();
@@ -65,7 +65,7 @@ export async function convertTuiArrivals(files) {
     const first = groupRows[0];
     const code = first[10].includes("/") ? first[10].split("/")[1].trim() : first[10].trim();
     const date = first[3];
-    const start_time = first[2];
+    const start_time = (first[2] || "").split(" - ")[0].trim();
     const vehicle = first[6];
     const transferType = first[7];
     let totalAdults = 0, totalChildren = 0, totalInfants = 0;
@@ -105,9 +105,9 @@ export async function convertTuiArrivals(files) {
       }
     });
 
-    const pickup = normalizeLocation(first[0]);
+    const dropoff = normalizeLocation(first[0]);
     const isSingleStop = locations.length === 1;
-    const dropoff = locations[locations.length - 1];
+    const pickup = locations[0];
 
     let route, name;
 
@@ -115,14 +115,14 @@ export async function convertTuiArrivals(files) {
       const passengerName = first[22] ? ` (${first[22].split(",").slice(0, 2).join(",").trim()})` : "";
       name = `${vehicle}${passengerName}`;
       const hotelName = first[19].trim();
-      route = `${pickup}-${hotelName}`;
+      route = `${hotelName}-${dropoff}`;
     } else if (groupRows.length === 1) {
       const passengerName = first[22] ? ` (${first[22].split(",").slice(0, 2).join(",").trim()})` : "";
       name = `${vehicle}${passengerName}`;
       route = `${pickup}-${dropoff}`;
     } else {
       name = vehicle;
-      route = `${pickup}-${locations.join("/")}`;
+      route = `${locations.join("/")}-${dropoff}`;
     }
     
     outputRows.push([
@@ -137,7 +137,7 @@ export async function convertTuiArrivals(files) {
       totalChildren,
       totalInfants,
       "Transfer",
-      "Arrival Transfer",
+      "Departure Transfer",
       transferType,
       brand,
       "",

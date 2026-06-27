@@ -6,6 +6,7 @@ import { convertHoliday } from "./components/converters/holiday";
 import { convertRideways } from "./components/converters/rideways";
 import { convertZenix } from "./components/converters/zenix";
 import { convertTuiArrivals } from "./components/converters/tuiArrivals";
+import { convertTuiDepartures } from "./components/converters/tuiDepartures";
 import { convertSuntransfers } from "./components/converters/suntransfers";
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
@@ -23,12 +24,13 @@ function App() {
             { value: 'rideways', label: 'Rideways' },
             //{ value: 'ath_holiday', label: 'Holiday (Athens)' },
             { value: 'sant_holiday', label: 'Holiday (Santorini)' },
-            { value: 'arr_tui', label: 'Tui (Arrivals) WIP' },
-            //{ value: 'dep_tui', label: 'Tui (Departures)' },
+            { value: 'arr_tui', label: 'Tui (Arrivals)' },
+            { value: 'dep_tui', label: 'Tui (Departures)' },
             { value: 'fay', label: 'Cyclades Collection' },
             //{ value: 'aurinko', label: 'Aurinko' },
             { value: 'zenix', label: 'EasyJet' },
             { value: 'suntransfers', label: 'Suntransfers' },
+            //{ value: 'avra', label: 'Avra' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -63,6 +65,9 @@ function App() {
         break;
       case 'arr_tui':
         convertTuiArrivals(selectedFiles);
+        break;
+      case 'dep_tui':
+        convertTuiDepartures(selectedFiles);
         break;
       case 'suntransfers':
         convertSuntransfers(selectedFiles);

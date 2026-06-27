@@ -10,5 +10,5 @@ export function normalizeClient(value) {
       return normalized;
     }
   }
-  return "Hellenic Zeus";
+  return "HELLENIC ZEUS";
 }
