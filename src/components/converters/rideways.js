@@ -58,11 +58,18 @@ export async function convertRideways(files) {
 
   rows.slice(1).forEach((row) => {
 
+    const insPrice = row[2];
     const code = row[0];
     const dateTime = row[1].split("T");
     const date = dateTime[0].split("-").reverse().join("/");       
-    const start_time = dateTime[1].substring(0, 5);
-    const name = `${row[4]} ${row[5]}`;
+    let start_time, name;
+    if (insPrice === "0") {
+      start_time = '00:00';
+      name = `CANCELLED!!! ${row[4]} ${row[5]}`;
+    } else {
+      start_time = dateTime[1].substring(0, 5);
+      name = `${row[4]} ${row[5]}`;
+    }
     const pickupRaw = row[8];
     const dropoffRaw = row[10];
     const pickupUp = pickupRaw.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -97,7 +104,6 @@ export async function convertRideways(files) {
     const flight = row[15];
     const flight_time = row[16] ? row[16].split("T")[1]?.substring(0, 5) : "";
     const comment = VEHICLE_MAP[row[7]] || row[7];
-    const insPrice = row[2];
     
     outputRows.push([
       code,

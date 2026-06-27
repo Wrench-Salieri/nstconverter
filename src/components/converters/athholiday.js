@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-import { normalizeLocation } from "../utils/locations.js";
+import { normalizeLocationAth } from "../utils/locationsAt.js";
 
 export async function convertHoliday(files) {
   const file = files[0];
@@ -49,8 +49,8 @@ export async function convertHoliday(files) {
     const date = isArrival ? row[10] : row[21];
     const start_time = isArrival ? row[11] : row[22];
     const name = row[2];
-    const pickup = isArrival ? normalizeLocation(row[19]) : normalizeLocation(row[20]);
-    const dropoff = isArrival ? normalizeLocation(row[20]) : normalizeLocation(row[19]);
+    const pickup = isArrival ? normalizeLocationAth(row[19]) : normalizeLocationAth(row[20]);
+    const dropoff = isArrival ? normalizeLocationAth(row[20]) : normalizeLocationAth(row[19]);
     const hotel = isArrival ? row[13] : row[26];
     const adults = row[4];
     const children = row[5];

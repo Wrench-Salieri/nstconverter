@@ -22,7 +22,7 @@ function App() {
 
   const partnerData = [
             { value: 'rideways', label: 'Rideways' },
-            //{ value: 'ath_holiday', label: 'Holiday (Athens)' },
+            { value: 'ath_holiday', label: 'Holiday (Athens)' },
             { value: 'sant_holiday', label: 'Holiday (Santorini)' },
             { value: 'arr_tui', label: 'Tui (Arrivals)' },
             { value: 'dep_tui', label: 'Tui (Departures)' },
