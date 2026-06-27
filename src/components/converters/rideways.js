@@ -47,11 +47,13 @@ export async function convertRideways(files) {
     "STANDARD": "Standard",
     "PEOPLE_CARRIER": "People Carrier",
     "LARGE_PEOPLE_CARRIER": "Large People Carrier",
-    "MINIVAN": "Minivan",
+    "MINIBUS": "Minibus",
     "EXECUTIVE": "Executive",
     "EXECUTIVE_PEOPLE_CARRIER": "Executive People Carrier",
     "EXECUTIVE_LARGE_PEOPLE_CARRIER": "Executive Large People Carrier",
-    "EXECUTIVE_MINIVAN": "Executive Minivan",
+    "EXECUTIVE_MINIBUS": "Executive Minibus",
+    "ELECTRIC_STANDARD": "Electric Standard",
+    "ELECTRIC_LUXURY": "Electric Luxury",
   };
 
   rows.slice(1).forEach((row) => {

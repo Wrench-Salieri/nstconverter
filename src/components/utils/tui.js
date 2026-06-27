@@ -1,5 +1,5 @@
 export const CLIENT_MAP = {
-  "TUI": "Tui",
+  "TUI": "TUI",
 };
 
 export function normalizeClient(value) {
