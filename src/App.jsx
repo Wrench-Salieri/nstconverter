@@ -8,6 +8,8 @@ import { convertZenix } from "./components/converters/zenix";
 import { convertTuiArrivals } from "./components/converters/tuiArrivals";
 import { convertTuiDepartures } from "./components/converters/tuiDepartures";
 import { convertSuntransfers } from "./components/converters/suntransfers";
+import { convertAvraArrivals } from "./components/converters/avraArrivals";
+import { convertMTS } from './components/converters/mts';
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -30,7 +32,8 @@ function App() {
             //{ value: 'aurinko', label: 'Aurinko' },
             { value: 'zenix', label: 'EasyJet' },
             { value: 'suntransfers', label: 'Suntransfers' },
-            //{ value: 'avra', label: 'Avra' },
+            { value: 'arr_avra', label: 'Avra' },
+            { value: 'mts', label: 'MTS Globe'}
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -71,6 +74,12 @@ function App() {
         break;
       case 'suntransfers':
         convertSuntransfers(selectedFiles);
+        break;
+      case 'arr_avra':
+        convertAvraArrivals(selectedFiles);
+        break;
+      case 'mts':
+        convertMTS(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

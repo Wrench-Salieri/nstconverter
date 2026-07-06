@@ -67,6 +67,14 @@ export async function convertZenix(files) {
     const hotel = row[9];
     const dropoff_Arr = normalizeHotel(hotel);
     const pickup_Dep = normalizeHotel(hotel);
+
+    let type;
+
+    if (row[18] === "Taxi") {
+      type = "Privare";
+    } else {
+      type = "Shared";
+    }
     
     // Arrivals
     outputRows.push([
@@ -82,14 +90,14 @@ export async function convertZenix(files) {
       infants,
       "Transfer",
       "Arrival Transfer",
-      "Private",
+      type,
       "No Brand",
       "",
       flight_Arr,
       flight_time_Arr,
       "",
       "",
-      "Easy Jet"
+      "GEM TRAVEL"
     ]);
 
     // Departures

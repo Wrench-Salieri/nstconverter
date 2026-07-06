@@ -55,7 +55,6 @@ export async function convertSuntransfers(files) {
     const isAthens = locationText.includes("ATHENS") || locationText.includes("ATHEN");
     const isSantorini = locationText.includes("SANTORINI") || locationText.includes("THIRA");
     
-    const code = row[0];
     const transferLeg = row[2];
     let isArrival;
     if (transferLeg === "Airport") {
@@ -76,6 +75,7 @@ export async function convertSuntransfers(files) {
       dropoff = normalizeLocation(row[23]);
       customer = "SUNTRANSFERS";
     }
+    const code = isArrival ? row[0] : `${row[0]}-1`;
     const hotel = isArrival ? row[24] : row[21];
     const route = isArrival ? `${pickup}-${hotel}` : `${hotel}-${dropoff}`;
     const adults = row[13];

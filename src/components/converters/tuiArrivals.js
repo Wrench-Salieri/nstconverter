@@ -81,7 +81,7 @@ export async function convertTuiArrivals(files) {
     const flightParts = flightAndTime.split("-");
     const flight = flightParts.length >= 3 ? flightParts[2] : "";
     const flight_time = flightParts.length >= 1 ? flightParts[0] : "";
-    const comment = first[23];
+    const comment = `${first[23]} ${first[27]}`;
     const client = normalizeClient(comment);
 
     let brand;
@@ -119,7 +119,8 @@ export async function convertTuiArrivals(files) {
     } else if (groupRows.length === 1) {
       const passengerName = first[22] ? ` (${first[22].split(",").slice(0, 2).join(",").trim()})` : "";
       name = `${vehicle}${passengerName}`;
-      route = `${pickup}-${dropoff}`;
+      const hotelName = first[19].trim();
+      route = `${pickup}-${hotelName}`;
     } else {
       name = vehicle;
       route = `${pickup}-${locations.join("/")}`;

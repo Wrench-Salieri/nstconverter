@@ -65,7 +65,7 @@ export async function convertTuiDepartures(files) {
     const first = groupRows[0];
     const code = first[10].includes("/") ? first[10].split("/")[1].trim() : first[10].trim();
     const date = first[3];
-    const start_time = (first[2] || "").split(" - ")[0].trim();
+    const start_time = (first[18] || "").split(" - ")[0].trim();
     const vehicle = first[6];
     const transferType = first[7];
     let totalAdults = 0, totalChildren = 0, totalInfants = 0;
@@ -81,7 +81,7 @@ export async function convertTuiDepartures(files) {
     const flightParts = flightAndTime.split("-");
     const flight = flightParts.length >= 3 ? flightParts[2] : "";
     const flight_time = flightParts.length >= 1 ? flightParts[0] : "";
-    const comment = first[23];
+    const comment = `${first[23]} ${first[27]}`;
     const client = normalizeClient(comment);
 
     let brand;
@@ -119,7 +119,8 @@ export async function convertTuiDepartures(files) {
     } else if (groupRows.length === 1) {
       const passengerName = first[22] ? ` (${first[22].split(",").slice(0, 2).join(",").trim()})` : "";
       name = `${vehicle}${passengerName}`;
-      route = `${pickup}-${dropoff}`;
+      const hotelName = first[19].trim();
+      route = `${hotelName}-${dropoff}`;
     } else {
       name = vehicle;
       route = `${locations.join("/")}-${dropoff}`;
