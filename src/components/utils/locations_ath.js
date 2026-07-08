@@ -10,6 +10,8 @@ export const LOCATION_MAP_ATH = {
   "PIRAUS": "Piraeus",
   "ATHENS": "Athens city centre",
   "KANTIA": "Nafplio",
+  "ATHINA": "Athens city centre",
+  "PIREAS": "Piraeus",
 };
 
 export function normalizeLocationAth(value) {
@@ -23,5 +25,5 @@ export function normalizeLocationAth(value) {
     }
   }
 
-  return value;
+  return "Athens city centre";
 }

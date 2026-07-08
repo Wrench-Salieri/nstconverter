@@ -1,6 +1,7 @@
 import * as XLSX from "xlsx";
 import { normalizeLocation } from "../utils/locations.js";
 import { normalizeClient } from "../utils/tui.js";
+import { normalizeBusStop } from "../utils/bus_stops.js";
 
 export async function convertTuiArrivals(files) {
   const file = files[0];
@@ -167,6 +168,7 @@ export async function convertTuiArrivals(files) {
 
     hotelMap.forEach((hotelRows, hotel) => {
       const location = hotelRows[0][16].trim();
+      const stopNumber = normalizeBusStop(location);
       const time = (hotelRows[0][18] || "").split(" - ")[0].trim();
 
       let hotelAdults = 0, hotelChildren = 0, hotelInfants = 0;
@@ -179,7 +181,7 @@ export async function convertTuiArrivals(files) {
       });
       const totalHotelPax = hotelAdults + hotelChildren + hotelInfants;
 
-      hotelOutputRows.push([location, hotel, totalHotelPax, time]);
+      hotelOutputRows.push([location, stopNumber, hotel, totalHotelPax, time]);
     });
 
     hotelMap.forEach((hotelRows, hotel) => {

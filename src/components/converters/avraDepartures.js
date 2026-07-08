@@ -1,7 +1,7 @@
 import * as XLSX from "xlsx";
 import { normalizeLocation } from "../utils/locations.js";
 
-export async function convertAvraArrivals(files) {
+export async function convertAvraDepartures(files) {
   const file = files[0];
 
   const data = await file.arrayBuffer();
@@ -47,7 +47,7 @@ export async function convertAvraArrivals(files) {
   const groups = new Map();
   
     rows.slice(1).forEach((row) => {
-      const type = row[11];
+      const type = row[10];
       if (!type) return;
       const busKey = type.trim();
       const key = busKey.toLowerCase().includes("prv")
@@ -63,19 +63,19 @@ export async function convertAvraArrivals(files) {
     groups.forEach((groupRows, key) => {
       const first = groupRows[0];
       const isPrivate = key.toLowerCase().includes("prv");
-      const date = first[10];
-      const start_time = first[12];
-      const pickup = "Airport";
-      const hotel = first[6];
-      const adults = parseInt(first[4]) || 0;
-      const children = parseInt(first[5]) || 0;
+      const date = first[9];
+      const start_time = first[11];
+      const dropoff = "Airport";
+      const hotel = first[5];
+      const adults = parseInt(first[3]) || 0;
+      const children = parseInt(first[4]) || 0;
       let totalAdults = 0, totalChildren = 0
       groupRows.forEach((row) => {
-        totalAdults += parseInt(row[4]) || 0;
-        totalChildren += parseInt(row[5]) || 0;
+        totalAdults += parseInt(row[3]) || 0;
+        totalChildren += parseInt(row[4]) || 0;
       });
       const totalPax = totalAdults + totalChildren;
-      const flight = first[9];
+      const flight = first[8];
       const flight_time = first[12];
       const transferTypeRaw = first[13];
 
@@ -90,25 +90,25 @@ export async function convertAvraArrivals(files) {
   
       const locations = [];
       groupRows.forEach((row) => {
-        const loc = normalizeLocation(row[7]);
+        const loc = normalizeLocation(row[6]);
         if (loc && !locations.includes(loc)) locations.push(loc);
       });
   
       const isSingleStop = locations.length === 1;
-      const dropoff = locations[locations.length - 1];
+      const pickup = locations[0];
   
       let route, name;
   
       if (isPrivate || groupRows.length === 1) {
-        name = `Jet2 Arrival Private (${first[2].trim()})`;
-        route = `${pickup}-${hotel}`;
+        name = `Jet2 Departure Private (${first[1].trim()})`;
+        route = `${hotel}-${dropoff}`;
       } else if (groupRows.length === 1) {
-        name = `Jet2 Arrival (${first[2].trim()})`;
+        name = `Jet2 Departure (${first[1].trim()})`;
         route = `${pickup}-${dropoff}`;
       } else {
         const busNumber = key.replace(/[^0-9]/g, "");
-        name = busNumber ? `Jet2 Arrival Bus ${busNumber}` : "Jet2 Arrival Bus";
-        route = `${pickup}-${locations.join("/")}`;
+        name = busNumber ? `Jet2 Departure Bus ${busNumber}` : "Jet2 Departure Bus";
+        route = `${locations.join("/")}-${dropoff}`;
       }
       
       outputRows.push([

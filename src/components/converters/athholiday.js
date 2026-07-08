@@ -1,8 +1,8 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-import { normalizeLocationAth } from "../utils/locationsAt.js";
+import { normalizeLocationAth } from "../utils/locations_ath.js";
 
-export async function convertHoliday(files) {
+export async function convertAthHoliday(files) {
   const file = files[0];
 
   const text = await file.text();
@@ -63,7 +63,7 @@ export async function convertHoliday(files) {
     const flight_time = isArrival ? row[11] : row[24];
     const phone = row[3];
 
-    const route = isArrival ? `pickup-${hotel}` : `${hotel}-dropoff`;
+    const route = isArrival ? `${pickup}-${hotel}` : `${hotel}-${dropoff}`;
     
     outputRows.push([
       code,

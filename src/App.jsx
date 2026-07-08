@@ -3,13 +3,16 @@ import Select from 'react-select'
 import dropdownStyles from './components/dropdownStyles'
 import { convertCyclades } from "./components/converters/cyclades";
 import { convertHoliday } from "./components/converters/holiday";
+import { convertAthHoliday } from "./components/converters/athholiday";
 import { convertRideways } from "./components/converters/rideways";
 import { convertZenix } from "./components/converters/zenix";
 import { convertTuiArrivals } from "./components/converters/tuiArrivals";
 import { convertTuiDepartures } from "./components/converters/tuiDepartures";
 import { convertSuntransfers } from "./components/converters/suntransfers";
 import { convertAvraArrivals } from "./components/converters/avraArrivals";
+import { convertAvraDepartures } from "./components/converters/avraDepartures";
 import { convertMTS } from './components/converters/mts';
+import { convertEmotion } from './components/converters/emotion';
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -20,7 +23,7 @@ function App() {
   const [selectedPartner, setSelectedPartner] = useState(null);
   
   const fileInputRef = useRef(null);
-  const acceptedFileExtensions = ["csv", "xlsx", "xls"];
+  const acceptedFileExtensions = ["csv", "xlsx", "xls", "pdf"];
 
   const partnerData = [
             { value: 'rideways', label: 'Rideways' },
@@ -32,8 +35,11 @@ function App() {
             //{ value: 'aurinko', label: 'Aurinko' },
             { value: 'zenix', label: 'EasyJet' },
             { value: 'suntransfers', label: 'Suntransfers' },
-            { value: 'arr_avra', label: 'Avra' },
-            { value: 'mts', label: 'MTS Globe'}
+            { value: 'arr_avra', label: 'Avra (Arrivals)' },
+            { value: 'dep_avra', label: 'Avra (Departures)' },
+            { value: 'mts', label: 'MTS Globe'},
+            { value: 'emotion', label: 'Emotion'},
+            //{ value: 'kolenia', label: 'Kolenia' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -57,6 +63,9 @@ function App() {
       case 'rideways':
         convertRideways(selectedFiles);
         break;
+      case 'ath_holiday':
+        convertAthHoliday(selectedFiles);
+        break;
       case 'sant_holiday':
         convertHoliday(selectedFiles);
         break;
@@ -78,8 +87,14 @@ function App() {
       case 'arr_avra':
         convertAvraArrivals(selectedFiles);
         break;
+      case 'dep_avra':
+        convertAvraDepartures(selectedFiles);
+        break;
       case 'mts':
         convertMTS(selectedFiles);
+        break;
+      case 'emotion':
+        convertEmotion(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

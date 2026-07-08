@@ -63,7 +63,7 @@ export async function convertHoliday(files) {
     const flight_time = isArrival ? row[11] : row[24];
     const phone = row[3];
 
-    const route = isArrival ? `pickup-${hotel}` : `${hotel}-dropoff`;
+    const route = isArrival ? `${pickup}-${hotel}` : `${hotel}-${dropoff}`;
     
     outputRows.push([
       code,
