@@ -13,6 +13,8 @@ import { convertAvraArrivals } from "./components/converters/avraArrivals";
 import { convertAvraDepartures } from "./components/converters/avraDepartures";
 import { convertMTS } from './components/converters/mts';
 import { convertEmotion } from './components/converters/emotion';
+import { convertKolenia } from './components/converters/kolenia';
+import { convertAurinko } from './components/converters/aurinko';
 import nstLogo from './assets/nst.svg'
 import documentIcon from './assets/document.png'
 import './App.css'
@@ -32,14 +34,14 @@ function App() {
             { value: 'arr_tui', label: 'Tui (Arrivals)' },
             { value: 'dep_tui', label: 'Tui (Departures)' },
             { value: 'fay', label: 'Cyclades Collection' },
-            //{ value: 'aurinko', label: 'Aurinko' },
+            { value: 'aurinko', label: 'Aurinko (WIP)' },
             { value: 'zenix', label: 'EasyJet' },
             { value: 'suntransfers', label: 'Suntransfers' },
             { value: 'arr_avra', label: 'Avra (Arrivals)' },
             { value: 'dep_avra', label: 'Avra (Departures)' },
             { value: 'mts', label: 'MTS Globe'},
             { value: 'emotion', label: 'Emotion'},
-            //{ value: 'kolenia', label: 'Kolenia' },
+            { value: 'kolenia', label: 'Kolenia' },
           ];
 
   const acceptedFileTypesString = acceptedFileExtensions
@@ -95,6 +97,12 @@ function App() {
         break;
       case 'emotion':
         convertEmotion(selectedFiles);
+        break;
+      case 'kolenia':
+        convertKolenia(selectedFiles);
+        break;
+      case 'aurinko':
+        convertAurinko(selectedFiles);
         break;
       default:
         setError("Unknown partner selected");

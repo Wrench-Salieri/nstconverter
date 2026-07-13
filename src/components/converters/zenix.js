@@ -71,7 +71,7 @@ export async function convertZenix(files) {
     let type;
 
     if (row[18] === "Taxi") {
-      type = "Privare";
+      type = "Private";
     } else {
       type = "Shared";
     }
@@ -114,7 +114,7 @@ export async function convertZenix(files) {
       infants,
       "Transfer",
       "Departure Transfer",
-      "Private",
+      type,
       "No Brand",
       "",
       flight_Dep,
