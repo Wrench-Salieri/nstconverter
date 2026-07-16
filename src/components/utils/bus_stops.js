@@ -1,6 +1,6 @@
 export const BUSSTOP_MAP = {
   "AIRPORT": "6",
-  "AKROTIRI": "5",
+  "AKROTIRI": "4",
   "AGIA PARASKEVI": "29",
   "AGIOS GEORGIOS": "33",
   "AMMOUDI": "5",
@@ -16,6 +16,7 @@ export const BUSSTOP_MAP = {
   "KARTERADOS": "24",
   "MEGALOCHORI": "27",
   "MESSARIA": "28",
+  "MESARIA": "28",
   "MONOLITHOS": "29",
   "OIA": "30",
   "PERISSA": "32",
@@ -24,6 +25,7 @@ export const BUSSTOP_MAP = {
   "PORT": "35",
   "PYRGOS": "36",
   "VLYCHADA": "38",
+  "VLICHADA": "38",
 };
 
 export function normalizeBusStop(value) {
